@@ -91,13 +91,13 @@ var upperCasedCharacters = [
 // Function to prompt user for password options
 function getPasswordOptions() {
     while (true) {
-        let characterLength = parseInt(prompt("How many characters? Must be between 8 and 128!"));
+        var characterLength = parseInt(prompt("How many characters? Must be between 8 and 128!"));
 
         if (characterLength >= 8 && characterLength <= 128) {
-            let includeUppercase = confirm("Include uppercase letters?");
-            let includeLowercase = confirm("Include lowercase letters?");
-            let includeNumbers = confirm("Include numbers?");
-            let includeSpecialCharacters = confirm("Include special characters?");
+            var includeUppercase = confirm("Include uppercase letters?");
+            var includeLowercase = confirm("Include lowercase letters?");
+            var includeNumbers = confirm("Include numbers?");
+            var includeSpecialCharacters = confirm("Include special characters?");
 
             return {
                 characterLength,
@@ -120,8 +120,8 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
-    const options = getPasswordOptions();
-    const password = []; // Use an array to store characters for better handling
+    var options = getPasswordOptions();
+    var password = []; // Use an array to store characters for better handling
 
     // Ensure at least one character type is included, but if this time was not, it return an empty string
     if (!options.includeUppercase && !options.includeLowercase && !options.includeNumbers && !options.includeSpecialCharacters) {
@@ -130,13 +130,13 @@ function generatePassword() {
     }
 
     while (password.length < options.characterLength) {
-        let characterTypes = [];
+        var passwochar = [];
 
-        if (options.includeUppercase) characterTypes.push(upperCasedCharacters);
-        if (options.includeLowercase) characterTypes.push(lowerCasedCharacters);
-        if (options.includeNumbers) characterTypes.push(numericCharacters);
-        if (options.includeSpecialCharacters) characterTypes.push(specialCharacters);
-        const chosenType = getRandom(characterTypes);
+        if (options.includeUppercase) passwochar.push(upperCasedCharacters);
+        if (options.includeLowercase) passwochar.push(lowerCasedCharacters);
+        if (options.includeNumbers) passwochar.push(numericCharacters);
+        if (options.includeSpecialCharacters) passwochar.push(specialCharacters);
+        var chosenType = getRandom(passowchar);
         password.push(getRandom(chosenType));
     }
     return password.join("");
