@@ -90,20 +90,26 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-    let characterLength = parseInt(prompt("How many characters? Must be at least 8!"));
-    let includeUppercase = confirm("Include uppercase letters?");
-    let includeLowercase = confirm("Include lowercase letters?");
-    let includeNumbers = confirm("Include numbers?");
-    let includeSpecialCharacters = confirm("Include special characters?");
+    while (true) {
+        let characterLength = parseInt(prompt("How many characters? Must be between 8 and 128!"));
 
-    return {
-        characterLength,
-        includeUppercase,
-        includeLowercase,
-        includeNumbers,
-        includeSpecialCharacters
-    };
+        if (characterLength >= 8 && characterLength <= 128) {
+            let includeUppercase = confirm("Include uppercase letters?");
+            let includeLowercase = confirm("Include lowercase letters?");
+            let includeNumbers = confirm("Include numbers?");
+            let includeSpecialCharacters = confirm("Include special characters?");
 
+            return {
+                characterLength,
+                includeUppercase,
+                includeLowercase,
+                includeNumbers,
+                includeSpecialCharacters
+            };
+        } else {
+            alert("Invalid character length! Must be between 8 and 128.");
+        }
+    }
 }
 
 // Function for getting a random element from an array
@@ -114,9 +120,23 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
-    getPasswordOptions();
-}
+    const options = getPasswordOptions();
+    const password = [];
 
+    // Ensure at least one character type is included
+    if (!options.includeUppercase && !options.includeLowercase && !options.includeNumbers && !options.includeSpecialCharacters) {
+        alert("Please select at least one character type to include in the password.");
+        return ""; // Return an empty string to prevent generating an invalid password
+    }
+
+    for (let i = 0; i < options.characterLength; i++) {
+        const characterTypes = [];
+
+        if (options.includeUppercase) characterTypes.push(upperCasedCharacters);
+        if (options.includeLowercase) characterTypes.push(lowerCasedCharacters);
+        if (options.includeNumbers) characterTypes.push(numericCharacters);
+    }
+}
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
 
