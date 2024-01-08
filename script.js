@@ -121,22 +121,29 @@ function getRandom(arr) {
 // Function to generate password with user input
 function generatePassword() {
     const options = getPasswordOptions();
-    const password = [];
+    const password = []; // Use an array to store characters for better handling
 
-    // Ensure at least one character type is included
+    // Ensure at least one character type is included, but if this time was not, it return an empty string
     if (!options.includeUppercase && !options.includeLowercase && !options.includeNumbers && !options.includeSpecialCharacters) {
-        alert("Please select at least one character type to include in the password.");
+        alert("Please select at least one character type to include in the password, otherwise create it in your mind.");
         return ""; // Return an empty string to prevent generating an invalid password
     }
 
-    for (let i = 0; i < options.characterLength; i++) {
-        const characterTypes = [];
+    while (password.length < options.characterLength) {
+        let characterTypes = [];
 
         if (options.includeUppercase) characterTypes.push(upperCasedCharacters);
         if (options.includeLowercase) characterTypes.push(lowerCasedCharacters);
         if (options.includeNumbers) characterTypes.push(numericCharacters);
+        if (options.includeSpecialCharacters) characterTypes.push(specialCharacters);
+        const chosenType = getRandom(characterTypes);
+        password.push(getRandom(chosenType));
     }
+    return password.join("");
 }
+
+
+
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
 
