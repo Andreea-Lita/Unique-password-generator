@@ -136,7 +136,7 @@ function generatePassword() {
         if (options.includeLowercase) passwochar.push(lowerCasedCharacters);
         if (options.includeNumbers) passwochar.push(numericCharacters);
         if (options.includeSpecialCharacters) passwochar.push(specialCharacters);
-        var chosenType = getRandom(passowchar);
+        var chosenType = getRandom(passwochar);
         password.push(getRandom(chosenType));
     }
     return password.join("");
